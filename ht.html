@@ -44,6 +44,23 @@
 				screenshotDetected();
 			}
 		});
+		
+		// Additional measures for mobile devices
+		document.addEventListener('touchmove', function(e) {
+			e.preventDefault();
+		});
+		
+		document.addEventListener('touchstart', function(e) {
+			e.preventDefault();
+		});
+		
+		document.addEventListener('touchend', function(e) {
+			e.preventDefault();
+		});
+		
+		window.addEventListener('orientationchange', function(e) {
+			screenshotDetected();
+		});
 	</script>
 
     <meta charset="UTF-8">
