@@ -21,6 +21,29 @@
 				e.preventDefault();
 			}
 		});
+		
+		const screenshotDetected = () => {
+			alert('Screenshot detected!');
+			// You can also add additional actions here, like redirecting the user
+		};
+		
+		document.addEventListener('visibilitychange', () => {
+			if (document.visibilityState === 'hidden') {
+				screenshotDetected();
+			}
+		});
+		
+		document.addEventListener('mozvisibilitychange', () => {
+			if (document.mozVisibilityState === 'hidden') {
+				screenshotDetected();
+			}
+		});
+		
+		document.addEventListener('webkitvisibilitychange', () => {
+			if (document.webkitVisibilityState === 'hidden') {
+				screenshotDetected();
+			}
+		});
 	</script>
 
     <meta charset="UTF-8">
