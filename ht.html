@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><style>
+<head>Here is the full code that combines text selection prevention, screenshot detection/blocking, and the block page:
+
+*index.html*
+```
+<head>
+	<style>
 		body {
 			-webkit-user-select: none; /* Chrome, Safari, Edge, Opera */
 			-moz-user-select: none; /* Firefox */
@@ -12,55 +17,31 @@
 	<meta name="opera:config" content="UserPrefs|DisableCopy=true">
 	<meta name="browser-config" content="disable-copy=true">
 	<meta http-equiv="X-Frame-Options" content="deny">
+	<script src="(link unavailable)"></script>
 	<script>
 		let warningCount = getCookie('screenshotWarningCount') || 0;
 		
-		document.addEventListener('contextmenu', function(e) {
-			e.preventDefault();
-		});
-		document.addEventListener('keydown', function(e) {
-			if (e.key === 'PrintScreen' || e.key === 'F12') {
-				e.preventDefault();
-				screenshotDetected();
-			}
-		});
+		const detector = new ScreenshotDetector();
 		
-		const screenshotDetected = () => {
+		detector.on('screenshot', () => {
 			warningCount++;
-			setCookie('screenshotWarningCount', warningCount, 7); // Set cookie for 7 days
+			setCookie('screenshotWarningCount', warningCount, 7);
 			
 			if (warningCount >= 3) {
 				blockUser();
 			} else {
-				alert(`Screenshot detected! You have ${3 - warningCount} remaining warnings.`);
+				alert(`Warning: Screenshot detected! You have ${3 - warningCount} remaining warnings.`);
 			}
-		};
+		});
 		
 		const blockUser = () => {
-			setCookie('userBlocked', true, 7); // Set cookie for 7 days
-			window.location.href = 'block-page.html'; // Redirect to block page
+			setCookie('userBlocked', true, 7);
+			window.location.href = 'block-page.html';
 		};
 		
 		if (getCookie('userBlocked')) {
-			window.location.href = 'block-page.html'; // Redirect to block page if user is blocked
+			window.location.href = 'block-page.html';
 		}
-		
-		// Additional measures for mobile devices
-		document.addEventListener('touchmove', function(e) {
-			e.preventDefault();
-		});
-		
-		document.addEventListener('touchstart', function(e) {
-			e.preventDefault();
-		});
-		
-		document.addEventListener('touchend', function(e) {
-			e.preventDefault();
-		});
-		
-		window.addEventListener('orientationchange', function(e) {
-			screenshotDetected();
-		});
 		
 		// Cookie functions
 		const setCookie = (name, value, days) => {
@@ -88,6 +69,7 @@
 			return null;
 		};
 	</script>
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
