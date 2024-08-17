@@ -2,89 +2,116 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Akio's Journey: From Darkness to Redemption</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			line-height: 1.6;
-			margin: 20px;
-			padding: 20px;
-			background-color: #f4f4f4;
-			-webkit-user-select: none; /* Chrome, Safari, Edge, Opera */
-			-moz-user-select: none; /* Firefox */
-			-ms-user-select: none; /* IE, Edge */
-			user-select: none; /* Standard */
-		}
-		h1, h2 {
-			color: #333;
-		}
-		h1 {
-			text-align: center;
-		}
-		h2 {
-			margin-top: 30px;
-			margin-bottom: 10px;
-			border-bottom: 2px solid #333;
-			padding-bottom: 5px;
-		}
-		p {
-			text-indent: 30px;
-			margin-bottom: 15px;
-		}
-	</style>
-	<meta name="screenshot" content="no">
-	<meta name="opera:config" content="UserPrefs|DisableCopy=true">
-	<meta name="browser-config" content="disable-copy=true">
-	<meta http-equiv="X-Frame-Options" content="deny">
-	<script src="(link unavailable)"></script>
-	<script>
-		let warningCount = getCookie('screenshotWarningCount') || 0;
-		
-		const detector = new ScreenshotDetector();
-		
-		detector.on('screenshot', () => {
-			warningCount++;
-			setCookie('screenshotWarningCount', warningCount, 7);
-			
-			blockUser();
-		});
-		
-		const blockUser = () => {
-			setCookie('userBlocked', true, 7);
-			window.location.href = 'block-page.html';
-		};
-		
-		if (getCookie('userBlocked')) {
-			window.location.href = 'block-page.html';
-		}
-		
-		// Cookie functions
-		const setCookie = (name, value, days) => {
-			let expires = '';
-			if (days) {
-				const date = new Date();
-				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-				expires = '; expires=' + date.toUTCString();
-			}
-			document.cookie = name + '=' + (value || '') + expires + '; path=/';
-		};
-		
-		const getCookie = (name) => {
-			let nameEQ = name + '=';
-			let ca = document.cookie.split(';');
-			for (let i = 0; i < ca.length; i++) {
-				let c = ca[i];
-				while (c.charAt(0) === ' ') {
-					c = c.substring(1, c.length);
-				}
-				if (c.indexOf(nameEQ) === 0) {
-					return c.substring(nameEQ.length, c.length);
-				}
-			}
-			return null;
-		};
-	</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akio's Journey: From Darkness to Redemption</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            -webkit-user-select: none; /* Chrome, Safari, Edge, Opera */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE, Edge */
+            user-select: none; /* Standard */
+            -webkit-touch-callout: none; /* Disable iOS callouts */
+            -webkit-tap-highlight-color: transparent; /* Disable tap highlight in mobile browsers */
+        }
+        h1, h2 {
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+        p {
+            text-indent: 30px;
+            margin-bottom: 15px;
+        }
+    </style>
+
+    <!-- Prevent Screenshot meta tags -->
+    <meta name="screenshot" content="no">
+    <meta name="opera:config" content="UserPrefs|DisableCopy=true">
+    <meta name="browser-config" content="disable-copy=true">
+    <meta http-equiv="X-Frame-Options" content="deny">
+
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p')) {
+                e.preventDefault();
+            }
+            if (e.key === 'PrintScreen') {
+                alert('Screenshots are disabled on this page');
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('keyup', function(e) {
+            if (e.key === 'PrintScreen') {
+                alert('Screenshots are disabled on this page');
+                document.body.style.display = 'none';
+                setTimeout(function() {
+                    document.body.style.display = '';
+                }, 300);
+            }
+        });
+
+        // Monitor visibility change (for mobile devices)
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                alert('Screenshots are disabled on this page.');
+            }
+        });
+
+        // Monitoring screenshot detection
+        let warningCount = getCookie('screenshotWarningCount') || 0;
+
+        const blockUser = () => {
+            setCookie('userBlocked', true, 7);
+            window.location.href = 'block-page.html';
+        };
+
+        if (getCookie('userBlocked')) {
+            window.location.href = 'block-page.html';
+        }
+
+        // Cookie functions
+        const setCookie = (name, value, days) => {
+            let expires = '';
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = '; expires=' + date.toUTCString();
+            }
+            document.cookie = name + '=' + (value || '') + expires + '; path=/';
+        };
+
+        const getCookie = (name) => {
+            let nameEQ = name + '=';
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1, c.length);
+                }
+                if (c.indexOf(nameEQ) === 0) {
+                    return c.substring(nameEQ.length, c.length);
+                }
+            }
+            return null;
+        };
+    </script>
 </head>
 <body>
     <h1>Akio's Journey: From Darkness to Redemption</h1>
