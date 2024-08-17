@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Akio's Journey: From Darkness to Redemption</title>
 	<style>
 		body {
+			font-family: Arial, sans-serif;
+			line-height: 1.6;
+			margin: 20px;
+			padding: 20px;
+			background-color: #f4f4f4;
 			-webkit-user-select: none; /* Chrome, Safari, Edge, Opera */
 			-moz-user-select: none; /* Firefox */
 			-ms-user-select: none; /* IE, Edge */
 			user-select: none; /* Standard */
+		}
+		h1, h2 {
+			color: #333;
+		}
+		h1 {
+			text-align: center;
+		}
+		h2 {
+			margin-top: 30px;
+			margin-bottom: 10px;
+			border-bottom: 2px solid #333;
+			padding-bottom: 5px;
+		}
+		p {
+			text-indent: 30px;
+			margin-bottom: 15px;
 		}
 	</style>
 	<meta name="screenshot" content="no">
@@ -23,11 +47,7 @@
 			warningCount++;
 			setCookie('screenshotWarningCount', warningCount, 7);
 			
-			if (warningCount >= 3) {
-				blockUser();
-			} else {
-				alert(`Warning: Screenshot detected! You have ${3 - warningCount} remaining warnings.`);
-			}
+			blockUser();
 		});
 		
 		const blockUser = () => {
@@ -65,36 +85,6 @@
 			return null;
 		};
 	</script>
-
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akio's Journey: From Darkness to Redemption</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        h1, h2 {
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-        }
-        h2 {
-            margin-top: 30px;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #333;
-            padding-bottom: 5px;
-        }
-        p {
-            text-indent: 30px;
-            margin-bottom: 15px;
-        }
-    </style>
 </head>
 <body>
     <h1>Akio's Journey: From Darkness to Redemption</h1>
