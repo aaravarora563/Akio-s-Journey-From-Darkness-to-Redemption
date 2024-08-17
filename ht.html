@@ -13,37 +13,37 @@
 	<meta name="browser-config" content="disable-copy=true">
 	<meta http-equiv="X-Frame-Options" content="deny">
 	<script>
+		let warningCount = getCookie('screenshotWarningCount') || 0;
+		
 		document.addEventListener('contextmenu', function(e) {
 			e.preventDefault();
 		});
 		document.addEventListener('keydown', function(e) {
 			if (e.key === 'PrintScreen' || e.key === 'F12') {
 				e.preventDefault();
+				screenshotDetected();
 			}
 		});
 		
 		const screenshotDetected = () => {
-			alert('Screenshot detected!');
-			// You can also add additional actions here, like redirecting the user
+			warningCount++;
+			setCookie('screenshotWarningCount', warningCount, 7); // Set cookie for 7 days
+			
+			if (warningCount >= 3) {
+				blockUser();
+			} else {
+				alert(`Screenshot detected! You have ${3 - warningCount} remaining warnings.`);
+			}
 		};
 		
-		document.addEventListener('visibilitychange', () => {
-			if (document.visibilityState === 'hidden') {
-				screenshotDetected();
-			}
-		});
+		const blockUser = () => {
+			setCookie('userBlocked', true, 7); // Set cookie for 7 days
+			window.location.href = 'block-page.html'; // Redirect to block page
+		};
 		
-		document.addEventListener('mozvisibilitychange', () => {
-			if (document.mozVisibilityState === 'hidden') {
-				screenshotDetected();
-			}
-		});
-		
-		document.addEventListener('webkitvisibilitychange', () => {
-			if (document.webkitVisibilityState === 'hidden') {
-				screenshotDetected();
-			}
-		});
+		if (getCookie('userBlocked')) {
+			window.location.href = 'block-page.html'; // Redirect to block page if user is blocked
+		}
 		
 		// Additional measures for mobile devices
 		document.addEventListener('touchmove', function(e) {
@@ -61,6 +61,32 @@
 		window.addEventListener('orientationchange', function(e) {
 			screenshotDetected();
 		});
+		
+		// Cookie functions
+		const setCookie = (name, value, days) => {
+			let expires = '';
+			if (days) {
+				const date = new Date();
+				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+				expires = '; expires=' + date.toUTCString();
+			}
+			document.cookie = name + '=' + (value || '') + expires + '; path=/';
+		};
+		
+		const getCookie = (name) => {
+			let nameEQ = name + '=';
+			let ca = document.cookie.split(';');
+			for (let i = 0; i < ca.length; i++) {
+				let c = ca[i];
+				while (c.charAt(0) === ' ') {
+					c = c.substring(1, c.length);
+				}
+				if (c.indexOf(nameEQ) === 0) {
+					return c.substring(nameEQ.length, c.length);
+				}
+			}
+			return null;
+		};
 	</script>
 
     <meta charset="UTF-8">
