@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><style>
+		body {
+			-webkit-user-select: none; /* Chrome, Safari, Edge, Opera */
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* IE, Edge */
+			user-select: none; /* Standard */
+		}
+	</style>
+	<meta name="screenshot" content="no">
+	<meta name="opera:config" content="UserPrefs|DisableCopy=true">
+	<meta name="browser-config" content="disable-copy=true">
+	<meta http-equiv="X-Frame-Options" content="deny">
+	<script>
+		document.addEventListener('contextmenu', function(e) {
+			e.preventDefault();
+		});
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'PrintScreen' || e.key === 'F12') {
+				e.preventDefault();
+			}
+		});
+	</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akio's Journey: From Darkness to Redemption</title>
